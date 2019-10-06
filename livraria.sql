@@ -83,13 +83,13 @@ begin
     
  end$$   
 
-create function ver_livros_cpf(cpf int)
+create function ver_livros_cpf(cpfi int)
 returns int deterministic
 begin 
 declare qtd_livros int;
-  select count(matricula) into qtd_livros from autores
-    
-    where matricula in(select matriculaAutor from autores_Livros group by matriculaAutor);
+  select (select count(codLivro) 
+  from autores_livros where matriculaAutor=matricula) into qtd_livros 
+        from autores where cpf=cpfi;
 return qtd_livros;
 end$$
 
@@ -113,12 +113,18 @@ create procedure atualiza_assunto(in sigla char(1), in dscricao varchar(50))
         where sigla=sigla;
         end$$
     
- 
+
+
+
 delimiter ;
+
+ 
+ 
 call exclui_assunto('x');
 select *from  v_contas_livros;
 select * from autores;
 select ver_livros_cpf(22222222222);
+drop function ver_livros_cpf;
 drop function ver_livros;
 select * from livros;
 call muda_data(2,'2010-10-01');

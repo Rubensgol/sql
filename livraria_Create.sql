@@ -2,6 +2,9 @@ drop database livraria;
 CREATE DATABASE livraria;
 USE livraria;
 
+explain select * from autores where nacionalidade>'c' and matricula =123;
+
+select * from autores;
 CREATE TABLE IF NOT EXISTS editoras (
 codEditora int AUTO_INCREMENT PRIMARY KEY,
 nome varchar(80));
@@ -40,6 +43,8 @@ select * from livros;
 update livros set preco =159
 where codLivro =1;
 select * from auditoria;
+
+
 
 alter table autores
 add Qtd_livros int;

@@ -29,4 +29,6 @@ end
 $$
 
 delimiter ;
+alter table autores
+add Qtd_livros int;
 drop trigger atualiza_qtdLivros_add;
